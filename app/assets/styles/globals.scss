@@ -2,9 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './react-select.scss';
+@import 'react-redux-toastr/src/styles/index';
+
 html,
 body {
-	@apply bg-white;
+	background-color: #f3f3f8;
 
 	padding: 0;
 	margin: 0;

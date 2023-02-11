@@ -1,0 +1,38 @@
+.wrapper {
+	@apply relative p-3 rounded-md mt-5 flex justify-between gap-5 mb-5 z-1 bg-white;
+	border: 1px solid blue;
+	cursor: pointer;
+	img {
+		width: 150px;
+		height: 150px;
+		object-fit: cover;
+	}
+
+	.data {
+		// border: 1px solid black;
+		width: 500px;
+		@apply flex flex-col justify-between;
+		h1 {
+			@apply text-primary;
+			font-size: 26px;
+		}
+		.description {
+			@apply font-bold text-base bg-white;
+
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 4;
+			-webkit-box-orient: vertical;
+		}
+	}
+	.details {
+		@apply flex flex-col justify-between items-center;
+		width: 200px;
+	}
+	.edit {
+		@apply absolute top-3 right-3 bg-primary;
+		z-index: 100;
+		width: 200px;
+	}
+}

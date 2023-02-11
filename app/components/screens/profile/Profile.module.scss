@@ -1,0 +1,46 @@
+.wrapper {
+	max-width: 1200px;
+	margin: auto;
+
+	.header {
+		@apply py-1 px-5 mt-5;
+		// border-bottom: 1px solid black;
+	}
+	.profile {
+		@apply flex items-start justify-between;
+		background-color: #f3f3f8;
+		padding: 20px;
+
+		.info {
+			@apply px-12 py-7 bg-white;
+
+			border-radius: 20px;
+			> div {
+				@apply mb-2;
+
+				span {
+					@apply text-primary text-2lg font-bold;
+				}
+				p {
+					@apply text-lg;
+				}
+			}
+		}
+		.edit {
+			@apply pt-0 mt-0;
+
+			max-width: 70%;
+
+			h1 {
+				@apply font-bold text-xl text-primary;
+			}
+
+			> div:first-child {
+				@apply mt-0;
+			}
+			> div {
+				@apply bg-white;
+			}
+		}
+	}
+}

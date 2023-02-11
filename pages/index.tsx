@@ -1,11 +1,12 @@
 import Layout from '@/components/layout/Layout'
+import Home from '@/components/screens/home/Home'
+import Link from 'next/link'
 
-export default function Home() {
+export default function HomePage() {
 	return (
 		<>
-			<Layout>
-				<div className='bg-primary'>Main Bodaa</div>
-			</Layout>
+			<Home />
+			<Link href='/cards'>Cards</Link>
 		</>
 	)
 }

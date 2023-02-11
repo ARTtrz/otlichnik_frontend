@@ -1,0 +1,18 @@
+.wrapper {
+	@apply mt-28;
+
+	> form {
+		@apply mx-auto w-1/2 air-block bg-opacity-80 p-7 text-center;
+
+		.buttons {
+			@apply mt-12;
+
+			button {
+				@apply text-primary bg-white;
+				&:hover {
+					@apply bg-primary text-white;
+				}
+			}
+		}
+	}
+}

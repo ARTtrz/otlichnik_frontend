@@ -1,7 +1,16 @@
+import { useRouter } from 'next/router'
 import { FC } from 'react'
 import styles from './CreateButton.module.scss'
 const CreateButton: FC = () => {
-	return <button className={styles.button}>Подать объявление</button>
+	const router = useRouter()
+	return (
+		<button
+			className={styles.button}
+			onClick={() => router.push('/create')}
+		>
+			Подать объявление
+		</button>
+	)
 }
 
 export default CreateButton

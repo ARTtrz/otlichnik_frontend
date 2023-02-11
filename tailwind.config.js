@@ -31,6 +31,10 @@ module.exports = {
 			}
 		},
 		extend: {
+			boxShadow: {
+				'3xl': ' 0px 0px 13px 9px rgba(34, 60, 80, 0.2);'
+			},
+
 			spacing: {
 				0.5: '0.12rem',
 				layout: '2.75rem'
@@ -79,6 +83,8 @@ module.exports = {
 		}
 	},
 	plugins: [
+		require('@tailwindcss/aspect-ratio'),
+		require('@tailwindcss/forms'),
 		plugin(({ addComponents, theme, addUtilities }) => {
 			addComponents({
 				'.btn-primary': {
@@ -105,9 +111,9 @@ module.exports = {
 
 				'.air-block': {
 					borderRadius: 10,
-					backgroundColor: theme('colors.gray.950'),
+					backgroundColor: theme('colors.white'),
 					color: theme('colors.white'),
-					boxShadow: theme('boxShadow.lg')
+					boxShadow: theme('boxShadow.3xl')
 				}
 			}),
 				addUtilities({
