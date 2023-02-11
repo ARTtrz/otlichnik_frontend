@@ -1,0 +1,16 @@
+.header {
+	@apply flex items-center justify-between;
+	height: 80px;
+	border: 1px solid black;
+
+	.logo {
+		@apply text-primary font-semibold text-3xl;
+	}
+	.second_part {
+		width: 50%;
+		@apply flex items-center justify-between;
+		button {
+			@apply ml-20;
+		}
+	}
+}

@@ -1,0 +1,11 @@
+.container {
+	@apply relative;
+	margin: auto;
+	display: block;
+	max-width: 1099px;
+	min-height: 100vh;
+
+	.layout {
+		@apply relative py-6;
+	}
+}
