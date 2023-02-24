@@ -19,7 +19,7 @@ export const getByFilter = createAsyncThunk<ICard[], IInput>(
 		try {
 			const response = await axiosClassic.get(
 				getCardsUrl(
-					`/filter?city=${filter?.city}&category=${filter?.category}&from=${filter?.from}&to=${filter?.to}&format=${filter.format}`
+					`/filter?city=${filter?.city}&category=${filter?.category}&experience=${filter.experience}&format=${filter.format}`
 				)
 			)
 			console.log('Response data', response.data)

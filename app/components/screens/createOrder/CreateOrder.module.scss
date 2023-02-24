@@ -1,0 +1,9 @@
+.wrapper {
+	@apply p-5;
+
+	form {
+		button {
+			@apply mt-5;
+		}
+	}
+}

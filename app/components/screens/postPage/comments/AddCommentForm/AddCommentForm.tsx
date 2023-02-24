@@ -6,8 +6,8 @@ import { IComment, ICommentDto } from '@/shared/types/comment.types'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-
-const AddCommentForm: FC<{ postId: number; refetch: any }> = ({
+import styles from './AddCommentForm.module.scss'
+const AddCommentForm: FC<{ postId: string; refetch: any }> = ({
 	postId,
 	refetch
 }) => {
@@ -50,19 +50,21 @@ const AddCommentForm: FC<{ postId: number; refetch: any }> = ({
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<div className={'relative'}>
+			<div className={styles.input}>
 				<Input
-					{...register('text', {
-						required: 'text is required!'
-					})}
+					{...register('text')}
 					placeholder='Add a public comment'
 					error={errors.text}
 					onChange={changeFocused}
 					onFocus={changeFocused}
 					id='input'
 				/>
-				<button className={'text-2xl absolute -right-2 top-5 '}>
-					send
+				<button
+					className={
+						'text-xl absolute right-3 top-2  text-primary'
+					}
+				>
+					отправить
 				</button>
 			</div>
 		</form>

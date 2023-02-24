@@ -10,16 +10,17 @@ const Cards = () => {
 		<>
 			{cards.map((card) => (
 				<CardItem
+					phone={card.phone_number}
 					id={card.id}
 					key={card.id}
 					city={card.city?.name}
-					address={card.address}
 					middle_price={card.middle_price}
 					views={card.views}
-					rating={card.rating}
+					rate={card.rate}
+					rating={card.rate}
 					description={card.description}
-					title={card.title}
-					thumbnail={card.thumbnail}
+					name={card.name}
+					avatar={card.avatar}
 				/>
 			))}
 		</>

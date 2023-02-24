@@ -9,7 +9,7 @@ export interface IFilterDto {
 	category: string | undefined
 }
 export interface IFavorite {
-	cardId: number
+	cardId: string
 	userId: number | undefined
 }
 export const CardService = {
@@ -17,9 +17,19 @@ export const CardService = {
 		return axiosClassic.get<ICard[]>(getCardsUrl('/'))
 	},
 
+	async getMostPopular() {
+		return axiosClassic.get<ICard[]>(getCardsUrl('/most-popular'))
+	},
+
 	async getAllByFilter(dto: IFilterDto) {
 		return axiosClassic.get<ICard[]>(
 			getCardsUrl(`/filter?city=${dto.city}&category=${dto.category}`)
+		)
+	},
+	async getAllBySearch(searchTerm?: string) {
+		return axios.get<ICard[]>(
+			getCardsUrl(`/get-search?searchTerm=${searchTerm}`),
+			{}
 		)
 	},
 
@@ -27,7 +37,7 @@ export const CardService = {
 		return axios.get<ICard[]>(getCardsUrl(`/user/${userId}`))
 	},
 
-	async getById(id: number) {
+	async getById(id: string) {
 		return axiosClassic.get<ICard>(getCardsUrl(`/${id}`))
 	},
 
@@ -43,11 +53,15 @@ export const CardService = {
 		return axios.post<any>(getCardsUrl('/create'), data)
 	},
 
-	async update(id: number, data: ICreateCard) {
+	async update(id: string, data: ICreateCard) {
 		return axios.put<ICard>(getCardsUrl(`/${id}`), data)
 	},
 
-	async updateViews(id: number) {
+	async updateViews(id: string) {
 		return axiosClassic.put(getCardsUrl(`/update-views/${id}`))
+	},
+
+	async deleteCard(_id: string | number | undefined) {
+		return axios.delete<string>(getCardsUrl(`/${_id}`))
 	}
 }

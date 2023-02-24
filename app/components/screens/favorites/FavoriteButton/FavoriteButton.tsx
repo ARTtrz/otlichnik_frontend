@@ -8,7 +8,7 @@ import { useFavorites } from '../useFavorites'
 import cn from 'classnames'
 import styles from './FavoriteButton.module.scss'
 import { toastr } from 'react-redux-toastr'
-const FavoriteButton: FC<{ cardId: number }> = ({ cardId }) => {
+const FavoriteButton: FC<{ cardId: string }> = ({ cardId }) => {
 	const [isSmashed, setIsSmashed] = useState(false)
 	const { user } = useAuth()
 	const { favoriteCards, refetch } = useFavorites(user ? user.id : 17)

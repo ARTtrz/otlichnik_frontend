@@ -14,6 +14,7 @@ import { UseActions } from '@/hooks/useActions'
 import Field from '@/components/ui/form-elemnts/Field'
 import { useCreateFormats } from './useCreateFormats'
 import { useFormats } from './useFormats'
+import { useExperience } from './useExpereince'
 const DynamicSelect = dynamic(() => import('@/components/ui/select/Select'), {
 	ssr: false
 })
@@ -34,7 +35,12 @@ const Filter: FC = () => {
 		useCategories()
 
 	const { isLoading: isCitiesLoading, data: cities } = useCities()
+	cities?.unshift({
+		label: 'Не важно',
+		value: ''
+	})
 	const { isLoading: isFormatsLoading, data: formats } = useFormats()
+	const { isLoading: isExLoading, data: experiences } = useExperience()
 
 	const router = useRouter()
 	const { getByFilter } = UseActions()
@@ -45,8 +51,9 @@ const Filter: FC = () => {
 			query: {
 				category: data.category,
 				city: data.city,
-				from: data.from,
-				to: data.to,
+				// from: data.from,
+				// to: data.to,
+				experience: data.experience,
 				format: data.format
 				// isOnline: data.isOnline,
 				// isOffline: data.isOffline
@@ -60,13 +67,14 @@ const Filter: FC = () => {
 			city: String(router.query.city),
 			// to: router.query.to == '' ? Number(router.query.to) : 21000,
 			// from: router.query.from == '' ? Number(router.query.from) : 0,
-			to: router.query.to == undefined ? '1' : router.query.to,
-			from: router.query.from == undefined ? '1' : router.query.from,
+			// to: router.query.to == undefined ? '1' : router.query.to,
+			// from: router.query.from == undefined ? '1' : router.query.from,
+			experience: String(router.query.experience),
 			format: String(router.query.format)
 			// isOffline: Boolean(router.query.isOffline),
 			// isOnline: Boolean(router.query.isOnline)
 		}
-		console.log(typeof filter.from, filter.to)
+
 		getByFilter({ filter })
 	}, [router.query])
 	return (
@@ -124,7 +132,7 @@ const Filter: FC = () => {
 									)}
 								/>
 							</div>
-							<div className={styles.format}>
+							{/* <div className={styles.format}>
 								<Field
 									{...register('from')}
 									placeholder='From'
@@ -133,7 +141,28 @@ const Filter: FC = () => {
 									{...register('to')}
 									placeholder='to'
 								/>
-							</div>
+							</div> */}
+							<Controller
+								control={control}
+								name='experience'
+								render={({
+									field,
+									fieldState: { error }
+								}) => (
+									<DynamicSelect
+										defaultValue={String(
+											router.query.experience
+										)}
+										field={field}
+										options={experiences || []}
+										isLoading={isExLoading}
+										placeholder='Опыт фриланера'
+										error={error}
+										empty_space='Выберите опыт фрилансера'
+									/>
+								)}
+							/>
+
 							<Controller
 								control={control}
 								name='format'

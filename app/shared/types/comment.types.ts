@@ -1,4 +1,4 @@
-import { IUser } from './user.types'
+import { IUser, IUserForComments } from './user.types'
 
 export interface IComment {
 	id: number
@@ -11,6 +11,6 @@ export interface IComment {
 
 export interface ICommentDto {
 	text: string
-	post: number
-	user: IUser | null
+	post: string
+	user: IUserForComments | null
 }

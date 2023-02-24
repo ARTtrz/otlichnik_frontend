@@ -10,6 +10,7 @@ import Menu from 'antd'
 import SubMenu from 'antd/es/menu/SubMenu'
 import Item from 'antd/es/list/Item'
 import { useRouter } from 'next/router'
+import MaterialIcon from '@/components/ui/MaterialIcon'
 
 const User: FC<IUser> = ({ user_name }) => {
 	const { user } = useTypedSelector((state) => state.user)
@@ -32,7 +33,12 @@ const User: FC<IUser> = ({ user_name }) => {
 					<a onClick={handleLogOut}>Logout</a> */}
 					<ul className={styles.menu}>
 						<li>
-							{user.name ? user.name : 'User'}
+							<div className={styles.profile}>
+								<MaterialIcon name='MdAccountCircle' />
+								<div>
+									{user.name ? user.name : 'User'}
+								</div>
+							</div>
 							<ul className={styles.extra}>
 								<a
 									onClick={() =>
@@ -40,6 +46,13 @@ const User: FC<IUser> = ({ user_name }) => {
 									}
 								>
 									Profile
+								</a>
+								<a
+									onClick={() =>
+										router.push('/my-orders')
+									}
+								>
+									Мои заказы
 								</a>
 								<a onClick={handleLogOut}>Logout</a>
 							</ul>

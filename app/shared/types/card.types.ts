@@ -1,5 +1,7 @@
 import { ICategory } from './category.types'
 import { ICity } from './city.types'
+import { IExperience } from './experience.types'
+import { IUser } from './user.types'
 
 export interface IPicture {
 	id: string
@@ -7,16 +9,18 @@ export interface IPicture {
 }
 
 export interface ICard {
-	id: number
-	title: string
-	work_time: string
+	id: string
+	name: string
+	phone_number: string
 	description: string
-	rating: number
+	rate: number
 	views: number
+	owner: IUser
 	images?: string[]
 	middle_price: number
-	address: string
+	age: number
 	city?: ICity
 	categories?: ICategory[]
-	thumbnail: string
+	avatar: string
+	experience?: IExperience
 }

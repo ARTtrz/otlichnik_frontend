@@ -1,6 +1,7 @@
 .wrapper {
-	@apply relative p-3 rounded-md mt-5 flex justify-between gap-5 mb-5 z-1 bg-white;
-	border: 1px solid blue;
+	@apply relative p-3 rounded-md mt-5 flex justify-between gap-5 mb-5 z-1;
+	background: #dbdcf4;
+	border: 1px solid #b6b7d0;
 	cursor: pointer;
 	img {
 		width: 150px;
@@ -13,11 +14,18 @@
 		width: 500px;
 		@apply flex flex-col justify-between;
 		h1 {
-			@apply text-primary;
+			@apply text-black;
 			font-size: 26px;
 		}
+		.phone {
+			@apply flex items-center gap-1;
+
+			> svg {
+				@apply text-primary;
+			}
+		}
 		.description {
-			@apply font-bold text-base bg-white;
+			@apply font-bold text-base text-black;
 
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -29,6 +37,16 @@
 	.details {
 		@apply flex flex-col justify-between items-center;
 		width: 200px;
+
+		.rating {
+			@apply flex items-center gap-1 justify-between p-0;
+			> span {
+			}
+
+			> svg {
+				@apply text-yellow-700 text-xl p-0;
+			}
+		}
 	}
 	.edit {
 		@apply absolute top-3 right-3 bg-primary;

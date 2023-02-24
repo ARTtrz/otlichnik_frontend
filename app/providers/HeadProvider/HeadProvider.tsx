@@ -8,11 +8,13 @@ export interface HeadProviderInterface {
 	children: ReactNode
 }
 
+const color = '#B6B7D0'
+
 const HeadProvider: FC<HeadProviderInterface> = ({ children }) => {
 	return (
 		<>
 			<NextProgressBar
-				color={accentColor}
+				color={color}
 				startPosition={0.3}
 				stopDelayMs={200}
 				height={3}

@@ -6,7 +6,6 @@ export default function HomePage() {
 	return (
 		<>
 			<Home />
-			<Link href='/cards'>Cards</Link>
 		</>
 	)
 }

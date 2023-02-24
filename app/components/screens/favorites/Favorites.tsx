@@ -1,3 +1,4 @@
+import Heading from '@/components/ui/form-elemnts/heading/Heading'
 import { useAuth } from '@/hooks/useAuth'
 import Meta from '@/utils/meta/Meta'
 import { FC } from 'react'
@@ -16,22 +17,28 @@ const Favorites: FC = () => {
 
 	return (
 		<Meta title='favorite cards'>
-			{favoriteCards?.map((card) => (
-				<>
-					<CardItem
-						id={card.id}
-						key={card.id}
-						city={card.city?.name}
-						address={card.address}
-						middle_price={card.middle_price}
-						views={card.views}
-						rating={card.rating}
-						description={card.description}
-						title={card.title}
-						thumbnail={card.thumbnail}
-					/>
-				</>
-			))}
+			<Heading title='Понравившиеся объявления' />
+			{favoriteCards ? (
+				favoriteCards?.map((card) => (
+					<>
+						<CardItem
+							phone={card.phone_number}
+							id={card.id}
+							key={card.id}
+							city={card.city?.name}
+							middle_price={card.middle_price}
+							views={card.views}
+							rate={card.rate}
+							rating={card.rate}
+							description={card.description}
+							name={card.name}
+							avatar={card.avatar}
+						/>
+					</>
+				))
+			) : (
+				<div>Нет лайканных</div>
+			)}
 		</Meta>
 	)
 }

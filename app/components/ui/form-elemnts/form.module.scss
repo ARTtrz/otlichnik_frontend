@@ -42,7 +42,8 @@
 		}
 
 		.editor {
-			@apply h-96 border rounded-b-lg border-gray-700 px-4 text-gray-500 overflow-hidden;
+			height: 300px;
+			@apply border rounded-b-lg border-gray-700 px-4 text-gray-500 overflow-hidden;
 		}
 	}
 }

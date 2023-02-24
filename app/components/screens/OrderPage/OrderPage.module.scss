@@ -1,0 +1,12 @@
+.wrapper {
+	@apply relative;
+	margin: 0 auto;
+
+	.title {
+		@apply text-primary font-bold;
+		font-size: 50px;
+	}
+	.description {
+		font-size: 20px;
+	}
+}

@@ -1,13 +1,14 @@
 import { ICity } from '@/shared/types/city.types'
 
 export interface ICardItem {
-	id: number
+	id: string
 	city: string | undefined
-	address: string
-	title: string
+	name: string
 	description: string
 	rating: number
 	middle_price: number
 	views: number
-	thumbnail: string
+	avatar: string
+	phone: string
+	rate: number
 }

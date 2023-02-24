@@ -9,14 +9,26 @@ import { getKeys } from '@/utils/object/getKeys'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import {
+	Controller,
+	SubmitHandler,
+	useFieldArray,
+	useForm
+} from 'react-hook-form'
 import { useMutation, useQuery } from 'react-query'
+import { toastr } from 'react-redux-toastr'
 import { stripHtml } from 'string-strip-html'
-import { ICreateCard } from '../../createCard/createCard.interface'
+import {
+	ICreateCard,
+	ICreateCardPage,
+	IUpdateCardPage
+} from '../../createCard/createCard.interface'
 import { useCreateCategories } from '../../filter/useCreateCategories'
 import { useCreateCities } from '../../filter/useCreateCities'
+import { useCreateExperiences } from '../../filter/useCreateExperience'
 import { useCreateFormats } from '../../filter/useCreateFormats'
 import styles from './CardEdit.module.scss'
+import { useCardEdit } from './useCardEdit'
 
 const DynamicSelect = dynamic(() => import('@/components/ui/select/Select'), {
 	ssr: false
@@ -30,8 +42,8 @@ const DynamicTextEditor = dynamic(
 )
 
 const CardEdit: FC = () => {
-	const { query } = useRouter()
-	const cardId = Number(query.id)
+	// const { query } = useRouter()
+	// const cardId = String(query.id)
 	const {
 		handleSubmit,
 		register,
@@ -39,35 +51,53 @@ const CardEdit: FC = () => {
 		setValue,
 		getValues,
 		control
-	} = useForm<ICreateCard>({
+	} = useForm<IUpdateCardPage>({
 		mode: 'onChange'
 	})
 
-	const { data: card, isLoading } = useQuery(
-		['get card by id', cardId],
-		() => CardService.getById(cardId),
-		{
-			onSuccess({ data }) {
-				getKeys(data).forEach((key) => {
-					setValue(key, data[key])
-				})
-			}
-		}
-		// { select: ({ data }) => data }
-	)
+	const { isLoading, onSubmit } = useCardEdit(setValue)
+	// const { push } = useRouter()
 
-	const { mutate } = useMutation(
-		['update card', cardId],
-		(data: ICreateCard) => CardService.update(cardId, data)
-	)
+	// const { data: cardForEdit, isLoading } = useQuery(
+	// 	['get card by id ok', cardId],
+	// 	() => CardService.getById(cardId),
+	// 	{
+	// 		onSuccess({ data }) {
+	// 			getKeys(data).forEach((key) => {
+	// 				setValue(key, data[key])
+	// 			})
+	// 		},
+	// 		enabled: !!query.id
+	// 	}
+	// 	// { select: ({ data }) => data }
+	// )
 
-	const onSubmit: SubmitHandler<ICreateCard> = (data) => {
-		mutate(data)
-	}
+	// const { mutateAsync } = useMutation(
+	// 	['update card', cardId],
+	// 	(data: ICreateCard) => CardService.update(cardId, data),
+	// 	{
+	// 		onSuccess() {
+	// 			toastr.success('Update card', 'update was successful')
+	// 			push('/')
+	// 		}
+	// 	}
+	// )
 
+	// const onSubmit: SubmitHandler<ICreateCard> = (data) => {
+	// 	console.log(data)
+	// 	alert('submit')
+	// 	mutateAsync(data)
+	// }
+
+	const { fields, append, remove } = useFieldArray({
+		name: 'pictures',
+		control
+	})
 	const { isLoading: isCityLoading, data: cities } = useCreateCities()
 	const { isLoading: isCategoriesLoading, data: categories } =
 		useCreateCategories()
+	const { isLoading: isExLoading, data: experiences } =
+		useCreateExperiences()
 	const { isLoading: isFormatsLoading, data: formats } = useCreateFormats()
 
 	return (
@@ -78,21 +108,67 @@ const CardEdit: FC = () => {
 				) : (
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className={styles.fields}>
+							<div>
+								{fields.map((field, index) => (
+									<div key={field.id}>
+										<Controller
+											control={control}
+											name={`pictures.${index}.url`}
+											defaultValue=''
+											render={({
+												field: {
+													value,
+													onChange // value - текущее состояние
+												},
+												fieldState: {
+													error
+												}
+											}) => (
+												<UploadField
+													onChange={
+														onChange
+													}
+													value={value}
+													error={error}
+													placeholder='photo'
+												/>
+											)}
+											rules={{
+												required: true
+											}}
+										/>
+
+										<button
+											onClick={() =>
+												remove(index)
+											}
+										>
+											Delete
+										</button>
+									</div>
+								))}
+								<button
+									onClick={() => append({ url: '' })}
+								>
+									Добавить фотографии
+								</button>
+							</div>
 							<Field
-								{...register('title', {
-									required: 'Title is required'
+								{...register('name', {
+									required: 'name is required'
 								})}
-								placeholder='Title'
-								error={errors.title}
+								placeholder='name'
+								error={errors.name}
 								style={{ width: '31%' }}
 							/>
 
 							<Field
-								{...register('address', {
-									required: 'Address is required'
+								{...register('phone_number', {
+									required:
+										'phone_number is required'
 								})}
-								placeholder='Address'
-								error={errors.address}
+								placeholder='phone_number'
+								error={errors.phone_number}
 								style={{ width: '31%' }}
 							/>
 							<Field
@@ -106,7 +182,7 @@ const CardEdit: FC = () => {
 							/>
 							<Controller
 								control={control}
-								name='thumbnail'
+								name='avatar'
 								defaultValue=''
 								render={({
 									field: {
@@ -119,7 +195,7 @@ const CardEdit: FC = () => {
 										onChange={onChange}
 										value={value}
 										error={error}
-										placeholder='Thumbnail'
+										placeholder='Avatar'
 									/>
 								)}
 								rules={{
@@ -146,6 +222,28 @@ const CardEdit: FC = () => {
 								)}
 								rules={{
 									required: 'City is required'
+								}}
+							/>
+
+							<Controller
+								control={control}
+								name='experience'
+								render={({
+									field,
+									fieldState: { error }
+								}) => (
+									<DynamicSelect
+										field={field}
+										options={experiences || []}
+										isLoading={isExLoading}
+										placeholder='Опыт'
+										error={error}
+										defaultValue={''}
+										empty_space={''}
+									/>
+								)}
+								rules={{
+									required: 'Опыт is required'
 								}}
 							/>
 
@@ -223,7 +321,7 @@ const CardEdit: FC = () => {
 							/>
 						</div>
 
-						<Button type='submit'>Create</Button>
+						<Button>Update</Button>
 					</form>
 				)}
 			</div>

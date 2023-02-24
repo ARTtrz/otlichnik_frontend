@@ -18,7 +18,11 @@ import { useCities } from '../filter/useCities'
 import { useCreateCategories } from '../filter/useCreateCategories'
 import { useCreateCities } from '../filter/useCreateCities'
 import { useCreateFormats } from '../filter/useCreateFormats'
-import { ICreateCard } from './createCard.interface'
+import {
+	ICreateCard,
+	ICreateCardPage,
+	ICreateEditCard
+} from './createCard.interface'
 import styles from './CreateCard.module.scss'
 import { useCreateCard } from './useCreateCard'
 
@@ -32,6 +36,10 @@ const DynamicTextEditor = dynamic(
 		ssr: false
 	}
 )
+import { ICategory } from '@/shared/types/category.types'
+import { ICity } from '@/shared/types/city.types'
+import { IUser } from '@/shared/types/user.types'
+import { useCreateExperiences } from '../filter/useCreateExperience'
 
 const CreateCard: FC = () => {
 	const { user } = useAuth()
@@ -42,7 +50,7 @@ const CreateCard: FC = () => {
 		setValue,
 		getValues,
 		control
-	} = useForm<ICreateCard>({
+	} = useForm<ICreateCardPage>({
 		mode: 'onChange'
 	})
 
@@ -56,6 +64,8 @@ const CreateCard: FC = () => {
 
 	const { isLoading: isCityLoading, data: cities } = useCreateCities()
 	const { isLoading, data: categories } = useCreateCategories()
+	const { isLoading: isExLoading, data: experiences } =
+		useCreateExperiences()
 	const { isLoading: isFormatsLoading, data: formats } = useCreateFormats()
 	const { onSubmit } = useCreateCard()
 
@@ -101,20 +111,29 @@ const CreateCard: FC = () => {
 
 					<div className={styles.first_data}>
 						<Field
-							{...register('title', {
-								required: 'Title is required'
+							{...register('name', {
+								required: 'name is required'
 							})}
-							placeholder='Title'
-							error={errors.title}
+							placeholder='name'
+							error={errors.name}
 							style={{ width: '31%' }}
 						/>
 
 						<Field
-							{...register('address', {
-								required: 'Address is required'
+							{...register('phone_number', {
+								required: 'Phone is required'
 							})}
-							placeholder='Address'
-							error={errors.address}
+							type='tel'
+							placeholder='Phone'
+							error={errors.phone_number}
+							style={{ width: '31%' }}
+						/>
+						<Field
+							{...register('age', {
+								required: 'age is required'
+							})}
+							placeholder='age'
+							error={errors.age}
 							style={{ width: '31%' }}
 						/>
 						<Field
@@ -129,7 +148,7 @@ const CreateCard: FC = () => {
 					<div className={styles.second_data}>
 						<Controller
 							control={control}
-							name='thumbnail'
+							name='avatar'
 							defaultValue=''
 							render={({
 								field: {
@@ -142,7 +161,7 @@ const CreateCard: FC = () => {
 									onChange={onChange}
 									value={value}
 									error={error}
-									placeholder='Thumbnail'
+									placeholder='Avatar'
 								/>
 							)}
 							rules={{
@@ -164,6 +183,31 @@ const CreateCard: FC = () => {
 											options={cities || []}
 											isLoading={isCityLoading}
 											placeholder='City'
+											error={error}
+											defaultValue={''}
+											empty_space={''}
+										/>
+									)}
+									rules={{
+										required: 'City is required'
+									}}
+								/>
+							</div>
+							<div className={styles.experience}>
+								<Controller
+									control={control}
+									name='experience'
+									render={({
+										field,
+										fieldState: { error }
+									}) => (
+										<DynamicSelect
+											field={field}
+											options={
+												experiences || []
+											}
+											isLoading={isExLoading}
+											placeholder='Experience'
 											error={error}
 											defaultValue={''}
 											empty_space={''}
@@ -255,7 +299,7 @@ const CreateCard: FC = () => {
 							}}
 						/>
 					</div>
-					<div className={styles.worktime}>
+					{/* <div className={styles.worktime}>
 						<Controller
 							control={control}
 							name='work_time'
@@ -281,7 +325,7 @@ const CreateCard: FC = () => {
 								}
 							}}
 						/>
-					</div>
+					</div> */}
 				</div>
 
 				<Button type='submit'>Create</Button>

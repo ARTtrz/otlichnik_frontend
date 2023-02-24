@@ -10,7 +10,7 @@ import CommentItem from './CommentItem/CommentItem'
 import styles from './Comments.module.scss'
 import { CommentService } from '@/services/comment.service'
 
-const Comments: FC<{ postId: number }> = ({ postId }) => {
+const Comments: FC<{ postId: string }> = ({ postId }) => {
 	const { user } = useAuth()
 
 	const { refetch, data, isLoading } = useQuery(

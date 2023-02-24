@@ -6,8 +6,8 @@ import styles from './CommentItem.module.scss'
 const CommentItem: FC<{ comment: IComment }> = ({ comment }) => {
 	return (
 		<div className={styles.commentItem}>
-			<p>{comment.user.name}</p>
-			<p>{comment.text}</p>
+			<p className={styles.user}> {comment.user.name}</p>
+			<p className={styles.text}>{comment.text}</p>
 		</div>
 	)
 }

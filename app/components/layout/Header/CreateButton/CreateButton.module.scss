@@ -1,7 +1,4 @@
 .button {
-	@apply text-base p-2 bg-primary text-white rounded-lg transition-all ease-in-out;
-
-	&:hover {
-		@apply py-3 px-4;
-	}
+	@apply text-base p-3  text-black rounded-lg transition-all ease-in-out;
+	background: #d9d9d9;
 }

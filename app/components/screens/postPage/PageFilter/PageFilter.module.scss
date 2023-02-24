@@ -1,10 +1,10 @@
 .filter_container {
-	@apply flex items-center justify-start;
+	@apply flex items-center mt-7 gap-10;
 	button {
 		flex: 0 0 calc(20% - 10px);
 		transition: all 0.4s ease;
 
-		@apply flex justify-center items-center cursor-pointer  bg-ocean p-4 text-black m-5;
+		@apply flex justify-center items-center cursor-pointer  bg-primary p-4 text-white;
 
 		span {
 			padding: 0 10px;

@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors')
 const plugin = require('tailwindcss/plugin')
 
-const primary = '#1B4FD3'
+const primary = '#5A6199'
 const ocean = '#CBE0FF'
 
 module.exports = {

@@ -28,11 +28,12 @@ const Profile: FC = () => {
 	console.log(cards, profile)
 	return (
 		<Meta title='Profile'>
+			<div className={styles.header}>
+				<Header />
+			</div>
 			<div className={styles.wrapper}>
 				{/* <ProfileHeader /> */}
-				<div className={styles.header}>
-					<Header />
-				</div>
+
 				{isLoading ? (
 					<div>Loading</div>
 				) : (
@@ -58,18 +59,19 @@ const Profile: FC = () => {
 								<h1>Мои объявления</h1>
 								{cards?.map((card) => (
 									<CardItem
+										phone={card.phone_number}
 										id={card.id}
 										key={card.id}
 										city={card.city?.name}
-										address={card.address}
+										name={card.name}
 										middle_price={
 											card.middle_price
 										}
 										views={card.views}
-										rating={card.rating}
+										rating={card.rate}
+										rate={card.rate}
 										description={card.description}
-										title={card.title}
-										thumbnail={card.thumbnail}
+										avatar={card.avatar}
 									/>
 								))}
 							</div>

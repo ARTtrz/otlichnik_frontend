@@ -6,8 +6,46 @@
 			@apply mt-5;
 		}
 		.main {
-			@apply flex items-center justify-between mt-5;
-			padding: 0 0px;
+			@apply flex items-center justify-start gap-10 mt-5;
+
+			.card {
+				@apply flex flex-col gap-7;
+
+				.title {
+					@apply flex items-center gap-3;
+
+					.name {
+						@apply font-bold;
+					}
+				}
+				.work {
+					@apply flex items-center gap-3;
+					.name {
+						@apply font-bold;
+					}
+				}
+				.middle_price {
+					@apply flex items-center gap-3;
+					.name {
+						@apply font-bold;
+					}
+				}
+				.phone {
+					@apply flex items-center gap-3;
+					.name {
+						@apply font-bold;
+					}
+				}
+				.categories {
+					@apply flex items-center gap-3;
+					.edu {
+						@apply flex items-center gap-4;
+					}
+					.name {
+						@apply font-bold;
+					}
+				}
+			}
 
 			.data {
 				@apply flex flex-col justify-between;

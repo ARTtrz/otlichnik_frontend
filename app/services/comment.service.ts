@@ -3,7 +3,7 @@ import { axiosClassic } from 'api/interceptors'
 import axios from '../api/interceptors'
 
 export const CommentService = {
-	async getCommentById(postId: number) {
+	async getCommentById(postId: string) {
 		return axiosClassic.get<IComment[]>(`/comment/${postId}`)
 	},
 

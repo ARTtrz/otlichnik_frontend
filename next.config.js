@@ -11,8 +11,9 @@ const nextConfig = {
 
 	images: {
 		domains: [
-			'otlichnik-kz.s3.us-east-1.amazonaws.com',
-			'otlichnik-kz.s3.amazonaws.com'
+			'hackaton-platform-bucket.s3.us-east-1.amazonaws.com',
+			'otlichnik-kz.s3.amazonaws.com',
+			'hackaton-platform-bucket.s3.amazonaws.com'
 		]
 	},
 

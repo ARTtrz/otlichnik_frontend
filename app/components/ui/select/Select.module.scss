@@ -3,10 +3,10 @@
 	z-index: 25;
 
 	> label {
-		@apply block;
+		@apply block text-black;
 
 		> span {
-			@apply text-xs uppercase text-gray-600 block mb-1;
+			@apply text-xs uppercase text-black block mb-1;
 		}
 	}
 }

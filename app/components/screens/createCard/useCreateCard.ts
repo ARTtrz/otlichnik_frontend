@@ -36,7 +36,7 @@ export const useCreateCard = () => {
 
 		console.log(data)
 		data.owner = user
-		data.rating = 0
+
 		data.images = images_arr
 		console.log(data)
 		await createAsync(data)

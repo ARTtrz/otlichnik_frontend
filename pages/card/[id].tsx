@@ -7,14 +7,13 @@ import PostPageItem, { IPostPage } from '@/components/screens/postPage/PostPage'
 import Header from '@/components/layout/Header/Header'
 
 const PostPage: NextPage<IPostPage> = ({ post }) => {
-	console.log(post.address)
 	return <>{post ? <PostPageItem post={post} /> : <div>Not Found</div>}</>
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 	try {
 		const { data: post } = await CardService.getById(
-			params ? Number(params.id) : 50
+			params ? String(params.id) : ''
 		)
 
 		console.log(post)

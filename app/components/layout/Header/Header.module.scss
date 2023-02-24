@@ -1,18 +1,19 @@
 .header {
-	@apply bg-white px-5 flex items-center justify-between border-solid border-2 border-primary;
-	border-radius: 30px;
+	@apply px-5 flex items-center justify-between;
+
 	margin-bottom: 20px;
 	height: 80px;
+	background: #5a6199;
 
 	// border: 1px solid black;
 	.logo {
-		@apply text-primary font-semibold text-3xl;
+		@apply text-white font-semibold text-3xl;
 	}
 	.second_part {
-		width: 50%;
+		width: 65%;
 		@apply flex items-center justify-between;
 		button {
-			@apply ml-20;
+			@apply ml-10;
 		}
 
 		> div {

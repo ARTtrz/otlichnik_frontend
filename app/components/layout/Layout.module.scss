@@ -2,10 +2,20 @@
 	@apply relative;
 	margin: 0 auto;
 	display: block;
-	max-width: 1150px;
+
 	min-height: 100vh;
+
+	> div:first-child {
+		@apply p-0;
+	}
 
 	.layout {
 		@apply relative py-6;
+
+		.filter {
+			max-width: 1175px;
+			margin: 0 auto;
+			display: block;
+		}
 	}
 }

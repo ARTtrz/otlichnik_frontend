@@ -6,6 +6,7 @@ import NoPhoto from './nophoto.jpg'
 import parse from 'html-react-parser'
 import { useRouter } from 'next/router'
 import FavoriteButton from '../../favorites/FavoriteButton/FavoriteButton'
+import MaterialIcon from '@/components/ui/MaterialIcon'
 
 const CardItem: FC<ICardItem> = (data) => {
 	const router = useRouter()
@@ -15,8 +16,8 @@ const CardItem: FC<ICardItem> = (data) => {
 			<Image
 				//src='https://otlichnik-kz.s3.us-east-1.amazonaws.com/1672757987443%2
 				src={
-					data.thumbnail
-						? data.thumbnail
+					data.avatar
+						? data.avatar
 						: 'https://otlichnik-kz.s3.amazonaws.com/1674298598884%20-%20toples.jpg'
 				}
 				alt='no photo'
@@ -26,15 +27,21 @@ const CardItem: FC<ICardItem> = (data) => {
 			/>
 
 			<div className={styles.data}>
-				<h1 className={styles.title}>{data.title}</h1>
+				<h1 className={styles.title}>{data.name}</h1>
 				<div className={styles.description}>
 					{parse(data.description)}
 				</div>
-				<div className={styles.address}>{data.address}</div>
+				<div className={styles.phone}>
+					<MaterialIcon name='MdPhone' />
+					<div>{data.phone}</div>
+				</div>
 			</div>
 			<div className={styles.details}>
 				<div className={styles.price}>{data.middle_price}</div>
-				<div className={styles.rating}>{data.rating}</div>
+				<div className={styles.rating}>
+					<span>{data.rate}</span>
+					<MaterialIcon name='MdStarRate' />
+				</div>
 				<div className={styles.views}>{data.views}</div>
 			</div>
 

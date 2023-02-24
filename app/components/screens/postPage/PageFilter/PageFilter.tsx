@@ -15,10 +15,7 @@ const PageFilter: FC<IPageFilter> = ({ setState }) => {
 				<span>Описание</span>
 				<MaterialIcon name='MdDescription' />
 			</button>
-			<button onClick={() => setState(1)}>
-				<span>Время работы</span>
-				<MaterialIcon name='MdSchedule' />
-			</button>
+
 			<button onClick={() => setState(2)}>
 				<span>Отзывы</span>
 				<MaterialIcon name='MdTextsms' />
